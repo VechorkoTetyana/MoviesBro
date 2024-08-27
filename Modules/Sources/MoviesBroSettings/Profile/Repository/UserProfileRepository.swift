@@ -1,22 +1,7 @@
 import Foundation
 import FirebaseDatabase
 import MoviesBroAuthentication
-
-public struct UserProfile: Codable {
-    public let fullName: String
-    public let description: String
-    public let profilePictureUrl: URL?
-    
-    public init(
-        fullName: String,
-        description: String,
-        profilePictureUrl: URL? = nil
-    ) {
-        self.fullName = fullName
-        self.description = description
-        self.profilePictureUrl = profilePictureUrl
-    }
-}
+import MoviesBroCore
 
 public enum UserProfileRepositoryError: Error {
     case notAuthenticated
@@ -49,6 +34,7 @@ public class UserProfileRepositoryLive: UserProfileRepository {
     public init(authService: AuthService = AuthServiceLive()) {
         reference = Database.database().reference()
         self.authService = authService
+        subscribeToLogout()
     }
     
     public func saveUserProfile(_ userProfile: UserProfile) throws {
@@ -56,10 +42,17 @@ public class UserProfileRepositoryLive: UserProfileRepository {
             throw UserProfileRepositoryError.notAuthenticated
         }
         
-        reference.child("users").child(user.uid).setValue([
+        let fullName = userProfile.fullName ?? ""
+        let location = userProfile.location ?? ""
+        
+        reference.child("users").child(user.uid).updateChildValues([
             "fullName": userProfile.fullName,
-            "description": userProfile.description
-        ])
+            "location": userProfile.location
+        ]) { error, _ in
+            if let error = error {
+                print("Error when User Profile saving \(error.localizedDescription)")
+            }
+        }
     }
     
     public func fetchUserProfile() async throws -> UserProfile {
@@ -81,5 +74,20 @@ public class UserProfileRepositoryLive: UserProfileRepository {
         reference.child("users").child(user.uid).updateChildValues([
             "profilePictureUrl": url.absoluteString
         ])
+    }
+}
+
+extension UserProfileRepositoryLive {
+    private func subscribeToLogout() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(didLogout),
+            name: Notification.Name(AppNotification.didLogout.rawValue),
+            object: nil
+        )
+    }
+    
+    @objc private func didLogout() {
+        profile = nil
     }
 }

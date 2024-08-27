@@ -5,7 +5,7 @@ public extension UINavigationController {
     static func styleMovieBro() {
         let appearence = UINavigationBar.appearance()
 
-        appearence.tintColor = .red
+        appearence.tintColor = UIColor.darkRed
 
         let image = UIImage(resource: .chevronLeft)
 

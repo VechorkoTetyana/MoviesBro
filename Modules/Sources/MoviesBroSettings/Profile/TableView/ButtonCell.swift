@@ -58,6 +58,8 @@ extension ButtonCell {
     
     private func setupiconImageView() {
         let imageView = UIImageView()
+        imageView.image = UIImage(resource: .avatar)
+
         
         contentView.addSubview(imageView)
         

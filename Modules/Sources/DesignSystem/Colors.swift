@@ -1,6 +1,11 @@
 import UIKit
 
 public extension UIColor {
+    static var darkRed: UIColor {
+            UIColor(resource: .darkRed)
+        }
+
+    
 /*    static var accent: UIColor {
         UIColor(resource: .accent)
     }
