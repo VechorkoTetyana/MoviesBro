@@ -21,10 +21,13 @@ class SettingsHeaderCell: UITableViewCell {
         commonInit()
     }
     
-    func configure(with viewModel: SettingsViewModel.Header) {
-        profileImageView.sd_setImage(with: viewModel.imageUrl)
-        nameLbl.text = viewModel.name
-        descriptionLbl.text = viewModel.description
+    func configure(with header: Header) {
+//      profileImageView.image = header.image
+        if let url = header.imageUrl {
+            profileImageView.sd_setImage(with: url)
+        }
+        nameLbl.text = header.name
+        descriptionLbl.text = header.location
     }
     
     private func commonInit() {
@@ -42,7 +45,6 @@ extension SettingsHeaderCell {
         setupStackView()
         setupImageView()
         setupLabels()
-        setupIndicator()
     }
     
     private func setupContainer() {
@@ -82,17 +84,21 @@ extension SettingsHeaderCell {
     
     private func setupImageView() {
         let imageView = UIImageView()
-        imageView.image = UIImage(resource: .avatar)
-        imageView.contentMode = .scaleAspectFit
-        
-        imageView.layer.cornerRadius = 28
+        imageView.layer.cornerRadius = 15
         imageView.layer.masksToBounds = true
-        
-        stackView.addArrangedSubview(imageView)
+
+        imageView.image = UIImage(resource: .avatar)
+        imageView.contentMode = .scaleAspectFill
+        contentView.addSubview(imageView)
         
         imageView.snp.makeConstraints { make in
-            make.width.equalTo(56)
-            make.height.equalTo(56)
+            make.size.equalTo(74)
+            make.left.equalToSuperview().offset(32)
+            make.top.equalToSuperview().offset(14)
+            make.bottom.equalToSuperview().offset(-20)
+
+  //          make.width.equalTo(56)
+  //          make.height.equalTo(56)
         }
         
         self.profileImageView = imageView
@@ -101,7 +107,15 @@ extension SettingsHeaderCell {
     private func setupLabels() {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = 2
+        stackView.spacing = 1
+        
+        contentView.addSubview(stackView)
+        
+        stackView.snp.makeConstraints { make in
+            make.left.equalTo(profileImageView.snp.right).offset(24)
+            make.bottom.equalToSuperview().offset(-24)
+            make.right.equalToSuperview().offset(-32)
+        }
         
         let nameLbl = setupNameLbl()
         stackView.addArrangedSubview(nameLbl)
@@ -128,15 +142,16 @@ extension SettingsHeaderCell {
         return descriptionLbl
     }
     
-    private func setupIndicator() {
+   /* private func setupIndicator() {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-        imageView.image = .indicator
+        imageView.image = UIImage(resource: .indicator)
         
         stackView.addArrangedSubview(imageView)
         
         imageView.snp.makeConstraints { make in
-            make.size.equalTo(24)
+            make.width.equalTo(24)
+            make.height.equalTo(24)
         }
-    }
+    }*/
 }

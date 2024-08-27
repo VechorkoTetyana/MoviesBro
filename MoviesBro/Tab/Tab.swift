@@ -11,7 +11,7 @@ enum Tab {
         case .contacts:
             return UITabBarItem(title: "Contacts", image: .contacts, tag: 0)
         case .calls:
-            return UITabBarItem(title: "Calls", image: .calls, tag: 0)
+            return UITabBarItem(title: "Home", image: .home, tag: 0)
         case .chats:
             return UITabBarItem(title: "Chats", image: .chats, tag: 0)
         case .settings:

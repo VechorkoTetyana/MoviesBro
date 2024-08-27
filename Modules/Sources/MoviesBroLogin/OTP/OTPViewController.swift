@@ -115,13 +115,13 @@ extension OTPViewController {
 
         for index in 0...5 {
             let background = UIView()
-            background.backgroundColor = .white
+            background.backgroundColor = UIColor.darkRed
             background.layer.cornerRadius = 8
             background.layer.masksToBounds = true
 
             let textField = UITextField()
             textField.textAlignment = .center
-            textField.textColor = .gray
+            textField.textColor = .white
             textField.font = .subtitle18
             textField.keyboardType = .numberPad
             textField.addTarget(self, action: #selector(didChangeText), for: .editingChanged)
@@ -149,11 +149,15 @@ extension OTPViewController {
 
     private func setupContinueButton() {
         let button = UIButton()
-        button.backgroundColor = .blue
-        button.titleLabel?.font = .subtitle16
-        button.setTitle(OTPScreenStrings.continueButton.rawValue, for: .normal)
-        button.layer.cornerRadius = 8
+        button.backgroundColor = UIColor.darkRed
+        button.layer.cornerRadius = 14
         button.layer.masksToBounds = true
+        button.titleLabel?.font = .subtitle16
+        button.isEnabled = false
+        button.alpha = 0.5
+        
+        button.setTitle(OTPScreenStrings.continueButton.rawValue, for: .normal)
+        
         button.addTarget(self, action: #selector(didTapContinue), for: .touchUpInside)
 
         stackView.addArrangedSubview(button)
@@ -186,8 +190,8 @@ extension OTPViewController {
 
 extension OTPViewController {
 
-    private func setContinueBtnDisabled() {
-        continueBtn.alpha = 0.5
+/*    private func setContinueBtnDisabled() {
+        continueBtn.alpha = 1
         continueBtn.isEnabled = false
     }
 
@@ -195,11 +199,11 @@ extension OTPViewController {
         continueBtn.alpha = 1
         continueBtn.isEnabled = true
     }
-
+*/
     @objc func didTapContinue() {
         view.endEditing(true)
 
-        self.setContinueBtnDisabled()
+//        self.setContinueBtnDisabled()
 
         let digits = textFields.map { $0.text ?? "" }
 
@@ -220,7 +224,7 @@ extension OTPViewController {
             } catch {
                 loadingVC.dismiss(animated: true) { [weak self] in
                     self?.showError(error.localizedDescription)
-                    self?.setContinueBtnEnabled()
+   //                 self?.setContinueBtnEnabled()
                 }
             }
         }

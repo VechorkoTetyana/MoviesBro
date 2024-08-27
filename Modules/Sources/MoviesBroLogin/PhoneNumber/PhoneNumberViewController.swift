@@ -25,6 +25,7 @@ public class PhoneNumberViewController: UIViewController {
         setupUI()
         configureKeyboard()
         subscribeToTextChange()
+        textFieldDidChange()
     }
     
     deinit {
@@ -32,7 +33,7 @@ public class PhoneNumberViewController: UIViewController {
     }
     
     private func subscribeToTextChange() {
-        NotificationCenter.default.addObserver(self, selector: #selector(textFieldDidChange), name: UITextField.textDidChangeNotification, object: self)
+        NotificationCenter.default.addObserver(self, selector: #selector(textFieldDidChange), name: UITextField.textDidChangeNotification, object: textField)
     }
 }
 
@@ -113,7 +114,7 @@ extension PhoneNumberViewController {
         
         //        textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         textField.withFlag = true
-        textField.font = .textField14
+        textField.font = .cardDetailTitle22
         textField.textColor = .black
         textField.withExamplePlaceholder = true
         textField.attributedPlaceholder = NSAttributedString(string: "Enter phone number")
@@ -130,8 +131,12 @@ extension PhoneNumberViewController {
     private func setupContinueButton() {
         let button = UIButton()
         button.setTitle(PhoneNumberText.continueButton.rawValue, for: .normal)
+        button.backgroundColor = UIColor.darkRed
+        button.layer.cornerRadius = 16
+        button.layer.masksToBounds = true
         
-        button.backgroundColor = .blue
+        button.isEnabled = false
+        button.alpha = 0.5
         
         button.addTarget(self, action: #selector(didTapContinue), for: .touchUpInside)
         
@@ -145,7 +150,7 @@ extension PhoneNumberViewController {
         }
         
         view.layoutIfNeeded()
-//        button.styleMatchMaker()
+        button.styleMoviesBro()
 
          self.continueBtn = button
             
@@ -206,7 +211,7 @@ private func configureKeyboard() {
 extension PhoneNumberViewController {
     
     @objc func didTapContinue() {
-        
+                
         guard
             textField.isValidNumber,
             let phoneNumber = textField.text
@@ -232,8 +237,11 @@ extension PhoneNumberViewController {
 extension PhoneNumberViewController {
     @objc func textFieldDidChange() {
         print("Text Field Did Change!")
-        continueBtn.isEnabled = textField.isValidNumber
-        continueBtn.alpha = textField.isValidNumber ? 1.0 : 0.25
+        let isPhoneNumberValid = textField.isValidNumber
+        continueBtn.isEnabled = isPhoneNumberValid
+
+//        continueBtn.isEnabled = textField.isValidNumber
+        continueBtn.alpha = isPhoneNumberValid ? 1.0 : 0.25
     }
 }
 

@@ -1,24 +1,26 @@
 import UIKit
-import Swinject
+import MoviesBroCore
 import MoviesBroAuthentication
+import Swinject
+
+struct Header {
+    let imageUrl: URL?
+    let name: String
+    let location: String
+}
 
 public final class SettingsViewModel {
     
-    struct Header {
-        let imageUrl: URL?
-        let name: String
-        let description: String
-    }
     var header: Header
     
-    var didUpdateHeader: (() -> ())?
+    private let authService: AuthService
+    private let userRepository: UserProfileRepository
+    private let profilePictureRepository: ProfilePictureRepository
     
-    private let coordinator: SettingsCoordinator
     private let container: Container
+    private let coordinator: SettingsCoordinator
     
-    private var userRepository: UserProfileRepository {
-        container.resolve(UserProfileRepository.self)!
-    }
+    var didUpdateHeader: (() -> ())?
     
     public init(
         container: Container,
@@ -26,33 +28,49 @@ public final class SettingsViewModel {
     ) {
         self.container = container
         self.coordinator = coordinator
+        self.authService = container.resolve(AuthService.self)!
+        self.userRepository = container.resolve(UserProfileRepository.self)!
+        self.profilePictureRepository = container.resolve(ProfilePictureRepository.self)!
 
-        header = Header(
+        self.header = Header(
             imageUrl: nil,
-            name: "~",
-            description: "No description"
+            name: "Setup Your Name",
+            location: "No Location"
         )
+    }
+    
+    func logout() throws {
+        try authService.logout()
+        NotificationCenter.default.post(.didLogout)
     }
     
     func presentProfileEdit() {
         coordinator.presentProfileEdit()
     }
     
-    func fetchUserProfile() async throws {
-       let profile = try await userRepository.fetchUserProfile()
-                        
-        await MainActor.run { [weak self] in
-            self?.updateHeader(with: profile)
+    func fetchUserProfile() {
+        Task { [weak self] in
+            do {
+                guard let profile = try await self?.userRepository.fetchUserProfile()
+                else { return }
+                                
+                await MainActor.run { [weak self] in
+                    self?.updateHeader(with: profile)
+                }
+            } catch {
+                print(error)
+            }
         }
     }
     
     private func updateHeader(with userProfile: UserProfile) {
-        header = Header(
+        self.header = Header(
             imageUrl: userProfile.profilePictureUrl,
             name: userProfile.fullName,
-            description: userProfile.description
+            location: userProfile.location
         )
         
         didUpdateHeader?()
     }
 }
+

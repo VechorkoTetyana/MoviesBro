@@ -26,7 +26,7 @@ public final class LoadingViewController: UIViewController {
 extension LoadingViewController {
 
     private func setupUI() {
-        view.backgroundColor = .lightGray
+        view.backgroundColor = .white
 
         setupStackView()
         setupLottie()

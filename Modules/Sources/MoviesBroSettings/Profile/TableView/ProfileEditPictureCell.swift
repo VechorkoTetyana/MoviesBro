@@ -1,6 +1,7 @@
 import UIKit
-import SnapKit
+import DesignSystem
 import SDWebImage
+import SnapKit
 
 class ProfileEditPictureCell: UITableViewCell {
     
@@ -44,6 +45,7 @@ extension ProfileEditPictureCell {
     
     private func setupProfileImage() {
         let imageView = UIImageView()
+//        imageView.image = UIImage(resource: .profilePictureSelection)
         imageView.layer.cornerRadius = 48
         imageView.layer.masksToBounds = true
         imageView.image = UIImage(resource: .avatar)
@@ -53,7 +55,7 @@ extension ProfileEditPictureCell {
         imageView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalToSuperview().offset(16)
-            make.size.equalTo(96)
+            make.size.equalTo(146)
         }
         
         self.profileImageView = imageView

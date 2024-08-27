@@ -2,7 +2,7 @@ import UIKit
 import MoviesBroCore
 import Swinject
 
-class ProfileEditCoordinator: Coordinator {
+class ProfileCoordinator: Coordinator {
 
     private let navigationController: UINavigationController
     private let container: Container
