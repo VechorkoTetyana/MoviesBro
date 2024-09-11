@@ -1,10 +1,8 @@
 import UIKit
 import DesignSystem
 import Swinject
-import MoviesBroAuthentication
 import MoviesBroCore
-import MoviesBroLogin
-import MoviesBroSettings
+import MoviesBroMovies
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -19,6 +17,27 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: windowScene)
         
         UINavigationController.styleMovieBro()
+
+        let accessToken = Bundle.main.object(forInfoDictionaryKey: "TMDBAPIAccessToken") as! String
+        
+        let networkConfigLive = TMDBNetworkConfig(accessToken: accessToken)
+
+        let networkService = NetworkServiceLive(config: networkConfigLive)
+        
+        let service = MoviesServiceLive(accessToken: accessToken, networkService: networkService)
+        
+        
+        Task {
+            do {
+                let movies = try await service.fetchPopularMovies()
+                print(movies.count)
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+        
+        
+//        UINavigationController.styleMovieBro()
         
         setupAppCoordinator()
         
@@ -55,7 +74,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
  */
     private func setupTabBar() -> UIViewController {
-        TabBarController(container: container)
+        TabBarController(
+            container: container,
+            coordinator: coordinator as! MoviesCoordinator
+        )
     }
 /*
     private func setupPhoneNumberController() -> UIViewController {

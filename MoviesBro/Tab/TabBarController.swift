@@ -1,16 +1,19 @@
 import UIKit
 import DesignSystem
-import MoviesBroAuthentication
-import MoviesBroSettings
 import Swinject
+import MoviesBroMovies
 
 class TabBarController: UITabBarController {
 
     private let container: Container
-
-    init(container: Container) {
+    private let coordinator: MoviesCoordinator
+    
+    init(container: Container, coordinator: MoviesCoordinator) {
         self.container = container
+        self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)
+        
+        setupViewControllers()
     }
     
     required init?(coder: NSCoder) {
@@ -39,28 +42,16 @@ class TabBarController: UITabBarController {
         let chats = UIViewController()
         chats.tabBarItem = Tab.chats.tabBarItem
 
-        let calls = UIViewController()
-        calls.tabBarItem = Tab.calls.tabBarItem
+        let home = MoviesViewController()
+        home.viewModel = .init(
+            container: container,
+            coordinator: coordinator
+        )
+        home.tabBarItem = Tab.home.tabBarItem
 
         viewControllers = [
-            calls,
-            chats,
-            setupSettings()
+            home,
+            chats
         ]
-    }
-
-    private func setupSettings() -> UIViewController {
-        let navigationController = UINavigationController()
-        let coordinator = SettingsCoordinator(
-            navigationController: navigationController,
-            container: container
-        )
-
-        coordinator.start()
-
-        coordinator.rootViewController.tabBarItem = Tab.settings.tabBarItem
-        coordinator.rootViewController.title = Tab.settings.tabBarItem.title
-
-        return navigationController
     }
 }

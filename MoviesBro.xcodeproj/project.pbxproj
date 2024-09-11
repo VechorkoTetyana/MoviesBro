@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		B804218F2C7D18C4009634F7 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B804218E2C7D18C4009634F7 /* AppCoordinator.swift */; };
+		B80421912C7E569D009634F7 /* MoviesBroMovies in Frameworks */ = {isa = PBXBuildFile; productRef = B80421902C7E569D009634F7 /* MoviesBroMovies */; };
+		B80421932C8733C5009634F7 /* DIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80421922C8733C5009634F7 /* DIContainer.swift */; };
 		B814D8BA2C76A4A5008443B5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B814D8B92C76A4A5008443B5 /* AppDelegate.swift */; };
 		B814D8BC2C76A4A5008443B5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B814D8BB2C76A4A5008443B5 /* SceneDelegate.swift */; };
 		B814D8BE2C76A4A5008443B5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B814D8BD2C76A4A5008443B5 /* ViewController.swift */; };
@@ -23,23 +25,19 @@
 		B814D9002C7895B1008443B5 /* IBMPlexSans-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B814D8FF2C7895B1008443B5 /* IBMPlexSans-MediumItalic.ttf */; };
 		B814D9022C7895C6008443B5 /* IBMPlexSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B814D9012C7895C6008443B5 /* IBMPlexSans-Italic.ttf */; };
 		B814D9052C78A8D8008443B5 /* DesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = B814D9042C78A8D8008443B5 /* DesignSystem */; };
-		B814D9072C78A8DE008443B5 /* MoviesBroAuthentication in Frameworks */ = {isa = PBXBuildFile; productRef = B814D9062C78A8DE008443B5 /* MoviesBroAuthentication */; };
 		B814D9092C78A8E2008443B5 /* MoviesBroCore in Frameworks */ = {isa = PBXBuildFile; productRef = B814D9082C78A8E2008443B5 /* MoviesBroCore */; };
-		B814D90B2C78A8E7008443B5 /* MoviesBroLogin in Frameworks */ = {isa = PBXBuildFile; productRef = B814D90A2C78A8E7008443B5 /* MoviesBroLogin */; };
-		B814D90D2C78A8EC008443B5 /* MoviesBroSettings in Frameworks */ = {isa = PBXBuildFile; productRef = B814D90C2C78A8EC008443B5 /* MoviesBroSettings */; };
 		B814D90F2C7B4610008443B5 /* AppAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B814D90E2C7B4610008443B5 /* AppAssembly.swift */; };
-		B814D9112C7B489D008443B5 /* DIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B814D9102C7B489D008443B5 /* DIContainer.swift */; };
 		B814D9142C7B4907008443B5 /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = B814D9132C7B4907008443B5 /* Tab.swift */; };
 		B814D9162C7B4916008443B5 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B814D9152C7B4916008443B5 /* TabBarController.swift */; };
 		B814D91D2C7B7EC3008443B5 /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = B814D91C2C7B7EC3008443B5 /* Swinject */; };
 		B814D9222C7B7F1B008443B5 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = B814D9212C7B7F1B008443B5 /* FirebaseDatabase */; };
 		B814D9242C7B7F1B008443B5 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = B814D9232C7B7F1B008443B5 /* FirebaseStorage */; };
-		B814D9262C7B7F46008443B5 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = B814D9252C7B7F46008443B5 /* FirebaseAuth */; };
 		B814D9282C7B827E008443B5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B814D9272C7B827E008443B5 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		B804218E2C7D18C4009634F7 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		B80421922C8733C5009634F7 /* DIContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DIContainer.swift; sourceTree = "<group>"; };
 		B814D8B62C76A4A5008443B5 /* MoviesBro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoviesBro.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B814D8B92C76A4A5008443B5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B814D8BB2C76A4A5008443B5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -61,7 +59,6 @@
 		B814D8FF2C7895B1008443B5 /* IBMPlexSans-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IBMPlexSans-MediumItalic.ttf"; sourceTree = "<group>"; };
 		B814D9012C7895C6008443B5 /* IBMPlexSans-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IBMPlexSans-Italic.ttf"; sourceTree = "<group>"; };
 		B814D90E2C7B4610008443B5 /* AppAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAssembly.swift; sourceTree = "<group>"; };
-		B814D9102C7B489D008443B5 /* DIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIContainer.swift; sourceTree = "<group>"; };
 		B814D9132C7B4907008443B5 /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
 		B814D9152C7B4916008443B5 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		B814D9272C7B827E008443B5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -72,13 +69,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B80421912C7E569D009634F7 /* MoviesBroMovies in Frameworks */,
 				B814D9092C78A8E2008443B5 /* MoviesBroCore in Frameworks */,
-				B814D9262C7B7F46008443B5 /* FirebaseAuth in Frameworks */,
 				B814D9242C7B7F1B008443B5 /* FirebaseStorage in Frameworks */,
-				B814D90B2C78A8E7008443B5 /* MoviesBroLogin in Frameworks */,
-				B814D90D2C78A8EC008443B5 /* MoviesBroSettings in Frameworks */,
 				B814D9052C78A8D8008443B5 /* DesignSystem in Frameworks */,
-				B814D9072C78A8DE008443B5 /* MoviesBroAuthentication in Frameworks */,
 				B814D9222C7B7F1B008443B5 /* FirebaseDatabase in Frameworks */,
 				B814D91D2C7B7EC3008443B5 /* Swinject in Frameworks */,
 			);
@@ -122,8 +116,8 @@
 				B814D8C72C76A4A7008443B5 /* Info.plist */,
 				B814D9272C7B827E008443B5 /* GoogleService-Info.plist */,
 				B814D90E2C7B4610008443B5 /* AppAssembly.swift */,
-				B814D9102C7B489D008443B5 /* DIContainer.swift */,
 				B804218E2C7D18C4009634F7 /* AppCoordinator.swift */,
+				B80421922C8733C5009634F7 /* DIContainer.swift */,
 			);
 			path = MoviesBro;
 			sourceTree = "<group>";
@@ -217,14 +211,11 @@
 			name = MoviesBro;
 			packageProductDependencies = (
 				B814D9042C78A8D8008443B5 /* DesignSystem */,
-				B814D9062C78A8DE008443B5 /* MoviesBroAuthentication */,
 				B814D9082C78A8E2008443B5 /* MoviesBroCore */,
-				B814D90A2C78A8E7008443B5 /* MoviesBroLogin */,
-				B814D90C2C78A8EC008443B5 /* MoviesBroSettings */,
 				B814D91C2C7B7EC3008443B5 /* Swinject */,
 				B814D9212C7B7F1B008443B5 /* FirebaseDatabase */,
 				B814D9232C7B7F1B008443B5 /* FirebaseStorage */,
-				B814D9252C7B7F46008443B5 /* FirebaseAuth */,
+				B80421902C7E569D009634F7 /* MoviesBroMovies */,
 			);
 			productName = MoviesBro;
 			productReference = B814D8B62C76A4A5008443B5 /* MoviesBro.app */;
@@ -288,9 +279,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B80421932C8733C5009634F7 /* DIContainer.swift in Sources */,
 				B814D8BE2C76A4A5008443B5 /* ViewController.swift in Sources */,
 				B814D9162C7B4916008443B5 /* TabBarController.swift in Sources */,
-				B814D9112C7B489D008443B5 /* DIContainer.swift in Sources */,
 				B814D8F42C774299008443B5 /* TMDBNetworkConfig.swift in Sources */,
 				B814D9142C7B4907008443B5 /* Tab.swift in Sources */,
 				B814D8BA2C76A4A5008443B5 /* AppDelegate.swift in Sources */,
@@ -535,25 +526,17 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		B80421902C7E569D009634F7 /* MoviesBroMovies */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = MoviesBroMovies;
+		};
 		B814D9042C78A8D8008443B5 /* DesignSystem */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = DesignSystem;
 		};
-		B814D9062C78A8DE008443B5 /* MoviesBroAuthentication */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = MoviesBroAuthentication;
-		};
 		B814D9082C78A8E2008443B5 /* MoviesBroCore */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = MoviesBroCore;
-		};
-		B814D90A2C78A8E7008443B5 /* MoviesBroLogin */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = MoviesBroLogin;
-		};
-		B814D90C2C78A8EC008443B5 /* MoviesBroSettings */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = MoviesBroSettings;
 		};
 		B814D91C2C7B7EC3008443B5 /* Swinject */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -569,11 +552,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B814D9202C7B7F1B008443B5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseStorage;
-		};
-		B814D9252C7B7F46008443B5 /* FirebaseAuth */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B814D9202C7B7F1B008443B5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAuth;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

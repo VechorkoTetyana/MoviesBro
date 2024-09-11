@@ -17,4 +17,8 @@ public extension UIImage {
     static var galka: UIImage {
         UIImage(resource: .galka)
     }
+    
+    static var chevronLeft: UIImage {
+        UIImage(resource: .chevronLeft)
+    }
 }

@@ -12,17 +12,12 @@ let package = Package(
             name: "DesignSystem",
             targets: ["DesignSystem"]),
         .library(
-            name: "MoviesBroAuthentication",
-            targets: ["MoviesBroAuthentication"]),
+            name: "MoviesBroMovies",
+            targets: ["MoviesBroMovies"]),
         .library(
             name: "MoviesBroCore",
             targets: ["MoviesBroCore"]),
-        .library(
-            name: "MoviesBroLogin",
-            targets: ["MoviesBroLogin"]),
-        .library(
-            name: "MoviesBroSettings",
-            targets: ["MoviesBroSettings"]),
+        
     ],
     dependencies: [
         .package(url: "https://github.com/firebase/firebase-ios-sdk.git", from: "11.1.0"),
@@ -48,45 +43,17 @@ let package = Package(
             ]
         ),
         .target(
-            name: "MoviesBroAuthentication",
+            name: "MoviesBroMovies",
             dependencies: [
-                .product(name: "FirebaseAuth", package: "firebase-ios-sdk")
+                "DesignSystem",
+                "MoviesBroCore",
+                "SDWebImage",
+                "Swinject",
+                "SnapKit",
+                "PhoneNumberKit",
+                .product(name: "FirebaseDatabase", package: "firebase-ios-sdk"),
             ]
         ),
-        
         .target(name: "MoviesBroCore"),
-        
-        .target(
-            name: "MoviesBroLogin",
-            dependencies: [
-            "MoviesBroAuthentication",
-            "MoviesBroCore",
-            "DesignSystem",
-            "PhoneNumberKit",
-            "Swinject",
-            "SnapKit"
-            ],
-            resources: [
-                .process("Resources")
-            ]
-        ),
-     
-        .target(
-            name: "MoviesBroSettings",
-            dependencies: [
-            "DesignSystem",
-            "MoviesBroAuthentication",
-            "MoviesBroCore",
-            "SnapKit",
-            "Swinject",
-            "SDWebImage",
-            .product(name: "FirebaseAuth", package: "firebase-ios-sdk"),
-            .product(name: "FirebaseDatabase", package: "firebase-ios-sdk"),
-            .product(name: "FirebaseStorage", package: "firebase-ios-sdk")
-            ],
-            resources: [
-                .process("Resources")
-            ]
-        )
     ]
 )

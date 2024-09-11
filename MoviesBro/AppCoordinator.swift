@@ -1,81 +1,48 @@
 import UIKit
+import MoviesBroMovies
 import MoviesBroCore
-import MoviesBroLogin
-import MoviesBroAuthentication
 import Swinject
 
 class AppCoordinator: Coordinator {
     
     private let navigationController: UINavigationController
     private let container: Container
-
-    private var authService: AuthService {
-        container.resolve(AuthService.self)!
-    }
-
-    init(navigationController: UINavigationController, container: Container) {
+//    private var moviesCoordinator: MoviesCoordinatorLive?
+   
+    init(
+        navigationController: UINavigationController,
+        container: Container
+    ) {
         self.navigationController = navigationController
         self.container = container
-
-        subscribeToLogin()
-        subscribeToLogout()
+        
+        UINavigationController.styleMovieBro()
     }
 
     func start() {
-        if authService.isAuthenticated {
-            navigationController.setViewControllers([setupTabBar()], animated: false)
-        } else {
-            presentLogin()
-        }
-    }
-
-    private func presentLogin() {
-        let coordinator = PhoneNumberCoordinatorLive(
+        let moviesCoordinator = MoviesCoordinatorLive(
             navigationController: navigationController,
             container: container
         )
-
-        coordinator.start()
+            moviesCoordinator.start()
+        
+            navigationController.setViewControllers([setupTabBar()], animated: false)
     }
 
     private func setupTabBar() -> UIViewController {
-        TabBarController(container: container)
-    }
-}
-
-// MARK:  Login
-
-extension AppCoordinator {
-    private func subscribeToLogin() {
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(didLoginSuccessfully),
-            name: Notification.Name(AppNotification.didLoginSuccessfully.rawValue),
-            object: nil
+        let moviesCoordinator = MoviesCoordinatorLive(
+            navigationController: navigationController,
+            container: container
         )
-    }
-
-    @objc
-    private func didLoginSuccessfully() {
-        navigationController.setViewControllers([setupTabBar()], animated: true)
-    }
-}
-
-// MARK:  Logout
-
-extension AppCoordinator {
-
-    private func subscribeToLogout() {
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(didLogout),
-            name: Notification.Name(AppNotification.didLogout.rawValue),
-            object: nil
+        
+        let tabBarController = TabBarController(
+            container: container,
+            coordinator: moviesCoordinator
         )
-    }
-
-    @objc
-    private func didLogout() {
-        presentLogin()
+        
+        moviesCoordinator.start()
+        
+        return tabBarController
     }
 }
+

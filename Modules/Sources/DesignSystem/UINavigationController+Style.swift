@@ -12,6 +12,10 @@ public extension UINavigationController {
         appearence.backIndicatorImage = image
         appearence.backIndicatorTransitionMaskImage = image
 
-        appearence.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+//      appearence.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        
+        let backButtonAppearance = UIBarButtonItem.appearance()
+                backButtonAppearance.setTitleTextAttributes([.foregroundColor: UIColor.clear], for: .normal)
+            
     }
 }

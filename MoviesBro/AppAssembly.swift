@@ -1,8 +1,6 @@
 import Foundation
 import Swinject
-import MoviesBroAuthentication
-import MoviesBroSettings
-import MoviesBroLogin
+import MoviesBroMovies
 
 public class AppAssembly {
 
@@ -13,23 +11,16 @@ public class AppAssembly {
     }
 
     func assemble() {
-        let authService = AuthServiceLive()
-        let userRepository = UserProfileRepositoryLive(authService: authService)
-        let profilePictureRepository = ProfilePictureRepositoryLive(
-            authService: authService,
-            userProfileRepository: userRepository
-        )
+        let accessToken = Bundle.main.object(forInfoDictionaryKey: "TMDBAPIAccessToken") as! String
+        
+        let networkConfigLive = TMDBNetworkConfig(accessToken: accessToken)
 
-        container.register(AuthService.self) { container in
-            authService
-        }
-
-        container.register(UserProfileRepository.self) { container in
-            userRepository
-        }
-
-        container.register(ProfilePictureRepository.self) { container in
-            profilePictureRepository
+        let networkService = NetworkServiceLive(config: networkConfigLive)
+        
+        let movieBroRepository = MoviesServiceLive(accessToken: accessToken, networkService: networkService)
+    
+        container.register(MoviesService.self) { container in
+            movieBroRepository
         }
     }
 }

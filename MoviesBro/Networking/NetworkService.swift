@@ -38,6 +38,8 @@ class NetworkServiceLive: NetworkService {
         
         url.append(queryItems: queryItems)
         
+        print("Final URL: \(url.absoluteString)")
+        
         var urlRequest = URLRequest(url: url)
         for (key, value) in config.headers {
             urlRequest.addValue(value, forHTTPHeaderField: key)
@@ -48,18 +50,24 @@ class NetworkServiceLive: NetworkService {
 //      URLSession.shared.data(for: request)
         
         guard let httpResponce = response as? HTTPURLResponse else {
+            print("Error #fjvhxdfkghjfh \(0)")
             throw NetworkError.serverError(0)
         }
         
         guard (200...299).contains(httpResponce.statusCode) else {
+            print("Error \(httpResponce.statusCode)")
             throw NetworkError.serverError(httpResponce.statusCode)
         }
         
 //        we need decoded data:
 //        return try JSONDecoder().decode(MoviesResponce.self, from: data)
         do {
+            let responseString = String(data: data, encoding: .utf8)
+            print("Server response: \(responseString ?? "No data")")
+            
             return try JSONDecoder().decode(T.self, from: data)
         } catch {
+            print("Decoding error: \(error)")
             throw NetworkError.decodingError
         }
     }
