@@ -14,16 +14,12 @@ class MovieInfoViewController: UIViewController {
         configureTableView()
         updateUI()
         
-        title = "Presented View"
-        
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelAction))
-
+        title = "Details"
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         fetchMovie()
-        
     }
     
     private func fetchMovie() {
@@ -40,58 +36,8 @@ class MovieInfoViewController: UIViewController {
     private func setupUI() {
         view.backgroundColor = .white
         setupTableView()
-        setupBackButton()
     }
     
-    private func setupBackButton() {
-        let container = UIView()
-        container.isUserInteractionEnabled = true
-        
-        let button = UIButton()
-        button.setImage(UIImage(systemName: "chevron.left"), for: .normal)
-        button.tintColor = .darkRed
-
-        button.isUserInteractionEnabled = true
-        view.bringSubviewToFront(container)
-
-        
-        button.addTarget(self, action: #selector(didTapBackBtn), for: .touchUpInside)
-        
-        
-        container.addSubview(button)
-        
-        button.snp.makeConstraints { make in
-            make.width.equalTo(44)
-            make.height.equalTo(44)
-            
-            make.left.equalToSuperview()
-            make.right.equalToSuperview()
-            make.centerY.equalToSuperview()
-        }
-        
-        view.addSubview(container)
-        
-        container.snp.makeConstraints { make in
-            make.height.equalTo(44)
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(20)
-            make.left.equalToSuperview()
-        }
-        
-        self.backButtonContainer = container
-        
-//        let tap = UITapGestureRecognizer(target: self, action: #selector(didTapBackBtn))
-    }
-    
-    @objc
-    private func didTapBackBtn() {
-        print("Back button tapped")
-        if let navigationController = navigationController {
-            navigationController.popViewController(animated: true)
-        } else {
-            dismiss(animated: true)
-        }
-    }
-
     private func setupTableView() {
         let tableView = UITableView()
         tableView.backgroundColor = .white

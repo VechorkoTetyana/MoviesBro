@@ -17,6 +17,7 @@ public final class MoviesViewModel {
     private var movieSource: [Movie] = []
     var movies: [Movie] = []
     var sectionTitles: [String] = []
+    var showError: ((String) -> Void)?
 
     public init(
         container: Container,
@@ -28,23 +29,18 @@ public final class MoviesViewModel {
 
     public func fetch() async throws {
         movieSource = try await repository.fetchPopularMovies()
-
-        updateMovies(with: movieSource)    }
+        
+        updateMovies(with: movieSource)
+    }
     
     func search(with query: String) {
         guard !query.isEmpty else {
             updateMovies(with: movieSource)
-
             return
         }
         
         let searchResults = movieSource.filter {
-            if let overview = $0.overview {
-                return $0.title!.lowercased().contains(query.lowercased())
-                || overview.contains(query)
-            } else {
-                return $0.title!.lowercased().contains(query.lowercased())
-            }
+            $0.title!.lowercased().contains(query.lowercased())
         }
         
         didCompleteSearch(with: searchResults)
@@ -63,5 +59,23 @@ public final class MoviesViewModel {
     private func updateMovies(with movies: [Movie]) {
         self.movies = movies
         sectionTitles = movies.map { $0.title ?? "" }.sorted()
+    }
+    
+    func searchMovies(query: String) async {
+        do {
+            print("searchRec test1")
+            guard !query.isEmpty else {
+                try await fetch()
+                return
+            }
+            print("searchRec test2 \(query)")
+
+            let movies = try await repository.searchMovies(query: query)
+            self.movies = movies
+            print("searchRec test3 \(movies.count)")
+
+        } catch {
+            showError?("error.serch-movies" + " " + error.localizedDescription)
+        }
     }
 }

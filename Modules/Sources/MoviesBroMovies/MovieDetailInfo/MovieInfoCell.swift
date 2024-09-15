@@ -6,7 +6,7 @@ class MovieInfoCell: UITableViewCell {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
-        iv.layer.cornerRadius = 18 // Assuming a 96x96 image size
+        iv.layer.cornerRadius = 18
         return iv
     }()
 
@@ -49,7 +49,7 @@ class MovieInfoCell: UITableViewCell {
         contentView.addSubview(descriptionLabel)
 
         movieImageView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(16)
+            make.top.equalToSuperview().offset(56)
             make.centerX.equalToSuperview()
             make.width.equalTo(300)
             make.height.equalTo(400)
@@ -62,7 +62,7 @@ class MovieInfoCell: UITableViewCell {
         }
 
         descriptionLabel.snp.makeConstraints { make in
-            make.top.equalTo(nameLabel.snp.bottom).offset(8)
+            make.top.equalTo(nameLabel.snp.bottom).offset(28)
             make.centerX.equalToSuperview()
             make.left.right.equalToSuperview().inset(16)
             make.bottom.equalToSuperview().offset(-16)
@@ -72,6 +72,7 @@ class MovieInfoCell: UITableViewCell {
     func configure(with movie: Movie) {
         movieImageView.image = .avatar
         nameLabel.text = movie.title
+        descriptionLabel.text = movie.releaseDate
         let baseURL = "https://image.tmdb.org/t/p/w500"
         
         guard let path = movie.posterPath else { return }

@@ -26,12 +26,9 @@ public final class MoviesCoordinatorLive: MoviesCoordinator {
             coordinator: self
         )
         controller.viewModel = viewModel
-        navigationController.setViewControllers([controller], animated: false)
+        navigationController.pushViewController(controller, animated: false)
 
         self.rootViewController = controller
-        
-//      navigationController.pushViewController(controller, animated: false)
-
     }
 
     public func showMovieDetails(for movie: Movie) {

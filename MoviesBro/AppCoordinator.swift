@@ -7,8 +7,7 @@ class AppCoordinator: Coordinator {
     
     private let navigationController: UINavigationController
     private let container: Container
-//    private var moviesCoordinator: MoviesCoordinatorLive?
-   
+    
     init(
         navigationController: UINavigationController,
         container: Container
@@ -18,17 +17,17 @@ class AppCoordinator: Coordinator {
         
         UINavigationController.styleMovieBro()
     }
-
+    
     func start() {
         let moviesCoordinator = MoviesCoordinatorLive(
             navigationController: navigationController,
             container: container
         )
-            moviesCoordinator.start()
+        moviesCoordinator.start()
         
-            navigationController.setViewControllers([setupTabBar()], animated: false)
+        navigationController.setViewControllers([setupTabBar()], animated: false)
     }
-
+    
     private func setupTabBar() -> UIViewController {
         let moviesCoordinator = MoviesCoordinatorLive(
             navigationController: navigationController,
