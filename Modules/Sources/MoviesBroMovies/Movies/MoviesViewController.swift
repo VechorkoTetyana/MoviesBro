@@ -5,8 +5,6 @@ import SDWebImage
 
 enum MoviesStrings: String {
     case search = "Search"
-    case moviesNotFound = "Movies not found"
-    case moviesSection = "MOVIES"
 }
 
 public class MoviesViewController: UIViewController {
@@ -14,8 +12,8 @@ public class MoviesViewController: UIViewController {
     private lazy var searchController: UISearchController = {
         UISearchController(searchResultsController: nil)
     }()
-    private weak var tableView: UITableView!
     
+    private weak var tableView: UITableView!
     public var viewModel: MoviesViewModel!
             
     public override func viewDidLoad() {
@@ -23,27 +21,11 @@ public class MoviesViewController: UIViewController {
         
         setupUI()
         configureTableView()
-        setupNavigationBar()
     }
     
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadMovies()
-    }
-    
-    private func setupNavigationBar() {
-        navigationItem.setMoviesBroTitle("Movie Details")
-        setupNavigationBackButton()
-
-    }
-    
-    private func setupNavigationBackButton() {
-        navigationItem.backBarButtonItem = UIBarButtonItem(
-            title: "",
-            style: .plain,
-            target: self,
-            action: nil
-        )
     }
     
     private func configureTableView() {
@@ -58,8 +40,17 @@ public class MoviesViewController: UIViewController {
         } else {
             // Fallback on earlier versions
         }
-        tableView.backgroundColor = .white
     }
+    
+    private lazy var searchBar: UISearchBar = {
+        let searchBar = UISearchBar()
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
+        searchBar.placeholder = "search.placeholder"
+        searchBar.delegate = self
+        searchBar.backgroundImage = UIImage()
+        searchBar.backgroundColor = .clear
+        return searchBar
+    }()
     
     private func loadMovies() {
         Task {
@@ -79,8 +70,19 @@ extension MoviesViewController {
 
     private func setupUI() {
         setupNavigationTitle()
-        setupSearchController()
         setupTableView()
+        view.addSubview(searchBar)
+
+        NSLayoutConstraint.activate([
+            searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            
+            tableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 16),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
     }
 
     private func setupNavigationTitle() {
@@ -90,14 +92,6 @@ extension MoviesViewController {
         ]
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
     }
-    
-    private func setupSearchController() {
-        searchController.searchResultsUpdater = self
-        searchController.searchBar.placeholder = MoviesStrings.search.rawValue
-        searchController.searchBar.tintColor = .darkRed
-
-        navigationItem.searchController = searchController
-    }
 
     private func setupTableView() {
         let tableView = UITableView()
@@ -105,21 +99,13 @@ extension MoviesViewController {
         view.addSubview(tableView)
 
         tableView.snp.makeConstraints { make in
-            make.top.equalToSuperview()
+            make.top.equalToSuperview().offset(150)
             make.left.equalToSuperview()
             make.right.equalToSuperview()
             make.bottom.equalToSuperview()
         }
 
         self.tableView = tableView
-    }
-}
-
-extension MoviesViewController: UISearchResultsUpdating {
-    public func updateSearchResults(for searchController: UISearchController) {
-        guard let searchText = searchController.searchBar.text else { return }
-        viewModel.search(with: searchText)
-        tableView.reloadData()
     }
 }
 
@@ -154,5 +140,16 @@ extension MoviesViewController: UITableViewDelegate, UITableViewDataSource {
         let movie = viewModel.movies[indexPath.row]
 
         viewModel.didSelectMovie(movie)
+    }
+}
+
+extension MoviesViewController: UISearchBarDelegate {
+    public func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        print("UISearchBarDelegate test")
+
+        Task {
+            await viewModel.searchMovies(query: searchText)
+            tableView.reloadData()
+        }
     }
 }

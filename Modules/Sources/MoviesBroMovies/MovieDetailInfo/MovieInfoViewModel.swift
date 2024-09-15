@@ -21,7 +21,6 @@ class MovieInfoViewModel {
     }
     
     func fetch() async throws {
-        
         movieDetail = try await repository.fetchMovieDetails(id: movie.id)
     }
 }

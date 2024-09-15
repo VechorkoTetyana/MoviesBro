@@ -50,7 +50,6 @@ class MoviesCell: UITableViewCell {
         
         profileImageView.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(16)
-            //          make.centerY.equalToSuperview()
             make.width.height.equalTo(40)
             make.top.equalToSuperview().offset(8)
             make.bottom.equalToSuperview().offset(-8)
@@ -58,7 +57,7 @@ class MoviesCell: UITableViewCell {
         
         nameLabel.snp.makeConstraints { make in
             make.leading.equalTo(profileImageView.snp.trailing).offset(16)
-            //          make.trailing.equalToSuperview().offset(-16)
+            make.trailing.equalToSuperview().offset(-16)
             make.centerY.equalToSuperview()
         }
     }
@@ -77,7 +76,6 @@ class MoviesCell: UITableViewCell {
                 profileImageView.image = .avatar
         }
         
-//      profileImageView.image = movie.posterPath ?? .avatar
         nameLabel.text = movie.title
         
         func prepareForReuse() {

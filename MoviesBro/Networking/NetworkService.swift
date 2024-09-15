@@ -13,8 +13,6 @@ protocol NetworkConfig {
 }
 
 protocol NetworkService {
-//  func fetch<T: Decodable>(url: URL, headers: [String: String]) async throws -> T
-//  func fetch<T: Decodable>(path: String) async throws -> T
     func fetch<T: Decodable>(path: String, queryItems: [URLQueryItem]) async throws -> T
 }
 
@@ -46,9 +44,7 @@ class NetworkServiceLive: NetworkService {
         }
         
         let (data, response) = try await URLSession.shared.data(for: urlRequest)
-        
-//      URLSession.shared.data(for: request)
-        
+                
         guard let httpResponce = response as? HTTPURLResponse else {
             print("Error #fjvhxdfkghjfh \(0)")
             throw NetworkError.serverError(0)
@@ -59,8 +55,6 @@ class NetworkServiceLive: NetworkService {
             throw NetworkError.serverError(httpResponce.statusCode)
         }
         
-//        we need decoded data:
-//        return try JSONDecoder().decode(MoviesResponce.self, from: data)
         do {
             let responseString = String(data: data, encoding: .utf8)
             print("Server response: \(responseString ?? "No data")")

@@ -1,10 +1,3 @@
-//
-//  MoviesBroUITestsLaunchTests.swift
-//  MoviesBroUITests
-//
-//  Created by Tetyana Vechorko on 22.08.24.
-//
-
 import XCTest
 
 final class MoviesBroUITestsLaunchTests: XCTestCase {
