@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>app-1-643617066531-ios-e663fb476515de613cab96</string>
+			</array>
+		</dict>
+	</array>
+	<key></key>
+	<string></string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>IBMPlexSans-MediumItalic.ttf</string>
+		<string>IBMPlexSans-Italic.ttf</string>
+		<string>IBMPlexSans-BoldItalic.ttf</string>
+	</array>
+	<key>CFBundleIdentifier</key>
+	<string></string>
+	<key>TMDBAPIAccessToken</key>
+	<string>eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1OGJlZDhmMTg0MzYyY2FjY2Q0ZmJmMWUzNDM1NmI1MyIsIm5iZiI6MTcyNDI3ODk4OC4xMTkyMDEsInN1YiI6IjY2YzRlMmY2YjliMmI3Mzk1OWQxMGNlMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.OlJcj9nf3Xqunk6jQOmanAIgvrx5dPjY5NfpHGMUInE</string>
+	<key>UIApplicationSceneManifest</key>
+	<dict>
+		<key>UIApplicationSupportsMultipleScenes</key>
+		<false/>
+		<key>UISceneConfigurations</key>
+		<dict>
+			<key>UIWindowSceneSessionRoleApplication</key>
+			<array>
+				<dict>
+					<key>UISceneConfigurationName</key>
+					<string>Default Configuration</string>
+					<key>UISceneDelegateClassName</key>
+					<string>$(PRODUCT_MODULE_NAME).SceneDelegate</string>
+				</dict>
+			</array>
+		</dict>
+	</dict>
+</dict>
+</plist>
